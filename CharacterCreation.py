@@ -14,3 +14,8 @@ def abilityRoll():
 baseAbility = []
 for i in range(6):
     baseAbility.append(abilityRoll())
+
+#Lets sort them for convenience as well
+baseAbility.sort()
+
+print(*baseAbility, sep = ", ")
