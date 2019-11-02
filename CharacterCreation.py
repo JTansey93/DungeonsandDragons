@@ -43,14 +43,33 @@ for i in range(6):
 #Lets sort them for convenience as well
 baseAbility.sort()
 
-#This turns the ability scores into ability modifiers
-AbilityModifier = []
+#Now we print them and ask the user to assign them to each of the six abilities
+print("We have generated a list of ability scores for you:")
 
 for i in range(len(baseAbility)):
-    AbilityModifier.append((baseAbility[i] / 2) - 5)
+    print(baseAbility[i], sep=", ")
 
-for i in range(len(AbilityModifier)):
-    print(AbilityModifier[i])
+abilities = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
+
+finalscore = {}
+
+for i in range(len(abilities)):
+    while True:
+      print("What score would you like to assign to ", abilities[i], "?")
+      answer = input()
+      if int(answer) not in baseAbility:
+          print("Please enter a value from the list given")
+      else:
+          finalscore[abilities[i]] = int(answer)
+          break
+
+
+#This turns the ability scores into ability modifiers
+def modifier(a):
+    return (a / 2) - 5
 
 print("Name: ", NewCharacter.Name,
        "Race: ", NewCharacter.Race)
+
+for k, v in finalscore.items():
+    print(k, ": ", v, modifier(v))
