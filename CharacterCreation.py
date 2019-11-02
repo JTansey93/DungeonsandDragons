@@ -1,5 +1,30 @@
 #! python3
+#A character creation tool for DnD 5E which takes input from the user with regards to race, class and background and outputs a usable character sheet
+
 import random
+
+#We're going to make a class with all the propertires one would expect of a Dnd 5E character
+class PlayerCharacter:
+    Name = ""
+    Race = ""
+    CharClass = ""
+
+RaceList = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"]
+
+#Then create an instance of this class to add all our new players information to
+NewCharacter = PlayerCharacter()
+
+#We'll start with the obvious step of asking them for their name
+print("Hello, and welcome to this character creation program for DnD 5E, please start by entering your character's name:")
+NewCharacter.Name = input()
+
+print("Now Enter a numeric character corresponding to your chosen race:")
+for i in range(len(RaceList)):
+    print((i+1), ": ", RaceList[i])
+
+PlayerRace = input()
+
+NewCharacter.Race = RaceList[int(PlayerRace) - 1]
 
 #This function simulates rolling a six sided dice four times and adding the three highest results together
 def abilityRoll():
@@ -18,4 +43,33 @@ for i in range(6):
 #Lets sort them for convenience as well
 baseAbility.sort()
 
-print(*baseAbility, sep = ", ")
+#Now we print them and ask the user to assign them to each of the six abilities
+print("We have generated a list of ability scores for you:")
+
+for i in range(len(baseAbility)):
+    print(baseAbility[i], sep=", ")
+
+abilities = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
+
+finalscore = {}
+
+for i in range(len(abilities)):
+    while True:
+      print("What score would you like to assign to ", abilities[i], "?")
+      answer = input()
+      if int(answer) not in baseAbility:
+          print("Please enter a value from the list given")
+      else:
+          finalscore[abilities[i]] = int(answer)
+          break
+
+
+#This turns the ability scores into ability modifiers
+def modifier(a):
+    return (a / 2) - 5
+
+print("Name: ", NewCharacter.Name,
+       "Race: ", NewCharacter.Race)
+
+for k, v in finalscore.items():
+    print(k, ": ", v, modifier(v))
