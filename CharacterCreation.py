@@ -43,8 +43,14 @@ for i in range(6):
 #Lets sort them for convenience as well
 baseAbility.sort()
 
+#This turns the ability scores into ability modifiers
+AbilityModifier = []
+
 for i in range(len(baseAbility)):
-    print(baseAbility[i])
+    AbilityModifier.append((baseAbility[i] / 2) - 5)
+
+for i in range(len(AbilityModifier)):
+    print(AbilityModifier[i])
 
 print("Name: ", NewCharacter.Name,
        "Race: ", NewCharacter.Race)
