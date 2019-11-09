@@ -3,6 +3,17 @@
 
 import random
 import math
+import csv
+
+racialbonuses = {'Dragonborn':[2,0,0,0,0,1],
+'Dwarf':[0,0,2,0,0,0],
+'Elf':[0,2,0,0,0,0],
+'Gnome':[0,0,0,2,0,0],
+'Half-Elf':[0,0,0,0,0,2],
+'Half-Orc':[2,0,1,0,0,0],
+'Halfling':[0,2,0,0,0,0],
+'Human':[1,1,1,1,1,1],
+'Tiefling':[0,0,0,1,0,2]}
 
 #We're going to make a class with all the propertires one would expect of a Dnd 5E character
 class PlayerCharacter:
@@ -89,6 +100,14 @@ for i in range(len(abilities)):
                   break
           break
 
+#This modifies the characters ability scores according to their racial bonuses
+for k in racialbonuses.keys():
+    if k == NewCharacter.Race:
+        race = k
+        for k in finalscore.keys():
+            for i in range(len(abilities)):
+                if abilities[i] == k:
+                    finalscore[k] = finalscore[k] + racialbonuses[race][i]
 
 #This turns the ability scores into ability modifiers
 def modifier(a):
