@@ -3,7 +3,6 @@
 
 import random
 import math
-import csv
 
 racialbonuses = {'Dragonborn':[2,0,0,0,0,1],
 'Dwarf':[0,0,2,0,0,0],
