@@ -1,8 +1,12 @@
 #! python3
 #A character creation tool for DnD 5E which takes input from the user with regards to race, class and background and outputs a usable character sheet
 
+import sys
+sys.path.insert(0, "C:\\Users\\jmsta\\OneDrive\\Documents\\GitHub\\DungeonsandDragons")
+
 import random
 import math
+import CharacterCreation.myfunctions as functions
 
 racialbonuses = {'Dragonborn':[2,0,0,0,0,1],
 'Dwarf':[0,0,2,0,0,0],
@@ -108,16 +112,12 @@ for k in racialbonuses.keys():
                 if abilities[i] == k:
                     finalscore[k] = finalscore[k] + racialbonuses[race][i]
 
-#This turns the ability scores into ability modifiers
-def modifier(a):
-    return math.floor((a / 2) - 5)
-
 print("Name: ", NewCharacter.Name,
        "\nRace: ", NewCharacter.Race,
        "\nClass: ", NewCharacter.CharClass,
        "\nBackround: ", NewCharacter.Background,
-       "\nInitiative: ", modifier(finalscore['Dexterity']),
-       "\nArmour Class: ", (10 + modifier(finalscore['Dexterity'])))
+       "\nInitiative: ", functions.modifier(finalscore['Dexterity']),
+       "\nArmour Class: ", (10 + functions.modifier(finalscore['Dexterity'])))
 
 for k, v in finalscore.items():
-    print(k, ": ", v, modifier(v))
+    print(k, ": ", v, functions.modifier(v))
